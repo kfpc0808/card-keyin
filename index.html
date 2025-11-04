@@ -195,25 +195,28 @@
             font-size: 22px;
             font-weight: 700;
             color: #4caf50;
-            margin-top: 10px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        }
+
+        .balance-warning {
+            color: #ff9800;
+        }
+
+        .balance-danger {
+            color: #f44336;
         }
 
         .progress-bar {
-            width: 100%;
             height: 8px;
             background: #e0e0e0;
-            border-radius: 4px;
-            margin-top: 10px;
+            border-radius: 10px;
             overflow: hidden;
+            margin-top: 8px;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4caf50 0%, #f5576c 100%);
-            transition: width 0.3s;
+            background: linear-gradient(90deg, #4caf50 0%, #ff9800 70%, #f44336 100%);
+            transition: width 0.3s ease;
         }
 
         .table-container {
@@ -221,219 +224,255 @@
             padding: 15px;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
 
-        .table-container table {
+        table {
             width: 100%;
-            min-width: 800px;
             border-collapse: collapse;
+            font-size: 12px;
         }
 
-        .table-container th {
-            padding: 12px 8px;
-            text-align: center;
+        th {
+            background: #667eea;
+            color: white;
+            padding: 10px 5px;
             font-weight: 600;
-            font-size: 12px;
-            white-space: nowrap;
+            text-align: center;
             position: sticky;
             top: 0;
             z-index: 10;
-        }
-
-        .table-container td {
-            padding: 12px 8px;
-            font-size: 13px;
             white-space: nowrap;
-            border-bottom: 1px solid #e0e0e0;
         }
 
-        .table-container tbody tr:hover {
-            background: #f5f5f5;
+        td {
+            padding: 10px 5px;
+            border-bottom: 1px solid #eee;
+            white-space: nowrap;
         }
 
-        .hidden {
-            display: none;
+        .view-toggle {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        /* iOS Safari 특정 스타일 */
-        @supports (-webkit-touch-callout: none) {
-            body {
-                min-height: -webkit-fill-available;
-            }
-            
-            .month-selector select {
-                font-size: 16px; /* iOS 자동 줌 방지 */
-            }
-        }
-
-        /* 모바일 최적화 (768px 이하) */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            .header {
-                padding: 15px;
-                margin-bottom: 10px;
-            }
-
-            .header h1 {
-                font-size: 18px;
-                margin-bottom: 6px;
-            }
-
-            .header p {
-                font-size: 11px;
-            }
-
-            .month-selector {
-                padding: 12px;
-                margin-bottom: 10px;
-            }
-
-            .month-controls {
-                width: 100%;
-            }
-
-            .month-selector select {
-                flex: 1;
-                min-width: 70px;
-            }
-
-            .btn {
-                flex: 1;
-                min-width: 100px;
-                padding: 10px 12px;
-                font-size: 12px;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-                margin-bottom: 10px;
-            }
-
-            .card-item {
-                padding: 15px;
-            }
-
-            .card-name {
-                font-size: 16px;
-                margin-bottom: 10px;
-            }
-
-            .card-installment-badge {
-                font-size: 10px;
-                padding: 3px 8px;
-            }
-
-            .card-info-value {
-                font-size: 14px;
-            }
-
-            .balance-amount {
-                font-size: 20px;
-            }
-
-            .table-container {
-                padding: 10px;
-                margin: 0 -5px;
-            }
-
-            .table-container th {
-                padding: 10px 6px;
-                font-size: 11px;
-            }
-
-            .table-container td {
-                padding: 10px 6px;
-                font-size: 12px;
-            }
-        }
-
-        /* iPhone SE 및 소형 기기 (375px 이하) */
-        @media (max-width: 375px) {
-            .header h1 {
-                font-size: 16px;
-            }
-
-            .header p {
-                font-size: 10px;
-            }
-
-            .month-selector label {
-                font-size: 12px;
-            }
-
-            .btn {
-                font-size: 11px;
-                padding: 8px 10px;
-            }
-
-            .card-name {
-                font-size: 15px;
-            }
-
-            .card-info-value {
-                font-size: 13px;
-            }
-
-            .balance-amount {
-                font-size: 18px;
-            }
-
-            .table-container th {
-                padding: 8px 4px;
-                font-size: 10px;
-            }
-
-            .table-container td {
-                padding: 8px 4px;
-                font-size: 11px;
-            }
-        }
-
-        /* 가로 모드 최적화 */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .cards-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* 로딩 메시지 스타일 */
-        #loadingMessage {
-            text-align: center;
-            padding: 30px 20px;
+        .loading {
             background: white;
+            padding: 30px;
             border-radius: 15px;
+            text-align: center;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
 
-        #loadingMessage > div:first-child {
-            font-size: 40px;
-            margin-bottom: 15px;
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
         }
 
-        #loadingMessage > div:last-child {
-            font-size: 16px;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* 월별 결제 내역 섹션 스타일 */
+        .payment-history-section {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .payment-history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .payment-history-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .payment-count {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .payment-history-table {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .payment-history-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .payment-history-table th {
+            background: #f8f9fa;
+            color: #333;
+            padding: 12px 8px;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 2px solid #667eea;
+            white-space: nowrap;
+        }
+
+        .payment-history-table td {
+            padding: 12px 8px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .payment-history-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .payment-row-date {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .payment-row-card {
             font-weight: 600;
             color: #667eea;
         }
 
+        .payment-row-amount {
+            font-weight: 700;
+            color: #333;
+        }
+
+        .payment-row-installment {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .payment-row-installment.lumpsum {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .payment-row-installment.installment {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        .payment-row-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .payment-summary {
+            margin-top: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            color: white;
+        }
+
+        .payment-summary-item {
+            text-align: center;
+        }
+
+        .payment-summary-label {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .payment-summary-value {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .empty-history-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
         @media (max-width: 768px) {
-            #loadingMessage {
-                padding: 25px 15px;
+            .payment-history-table table {
+                font-size: 11px;
             }
 
-            #loadingMessage > div:first-child {
-                font-size: 36px;
-                margin-bottom: 12px;
+            .payment-history-table th,
+            .payment-history-table td {
+                padding: 8px 4px;
             }
 
-            #loadingMessage > div:last-child {
-                font-size: 14px;
+            .payment-summary {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .payment-summary-value {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 18px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-history-section {
+                padding: 15px;
+            }
+
+            .payment-history-title {
+                font-size: 16px;
             }
         }
     </style>
@@ -441,227 +480,295 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>💳 카드사별 키인 한도 관리</h1>
-            <p>월별 / 카드사별 키인현황 확인</p>
+            <h1>🏦 카드사별 키인 한도 관리</h1>
+            <p>실시간 한도 사용 현황 및 결제 내역 조회</p>
         </div>
 
-        <!-- 월 선택 섹션 -->
-        <div class="month-selector" id="monthSelector">
+        <div class="month-selector">
             <div class="month-controls">
-                <label>조회 월:</label>
-                <select id="monthSelect" onchange="updateDisplay()">
+                <label for="monthSelect">📅 조회 월:</label>
+                <select id="monthSelect">
+                    <option value="1">1월</option>
+                    <option value="2">2월</option>
+                    <option value="3">3월</option>
+                    <option value="4">4월</option>
+                    <option value="5">5월</option>
+                    <option value="6">6월</option>
+                    <option value="7">7월</option>
+                    <option value="8">8월</option>
+                    <option value="9">9월</option>
                     <option value="10">10월</option>
                     <option value="11">11월</option>
                     <option value="12">12월</option>
                 </select>
-                <button onclick="reloadSheetData()" class="btn btn-secondary">🔄 새로고침</button>
-                <button onclick="toggleView()" id="viewToggleBtn" class="btn btn-primary">📊 테이블보기</button>
+                
+                <button class="btn btn-primary" onclick="loadSheetData()">🔄 새로고침</button>
+            </div>
+            
+            <div class="view-toggle">
+                <button class="btn btn-primary" onclick="switchView('cards')">📊 카드뷰</button>
+                <button class="btn btn-secondary" onclick="switchView('table')">📋 테이블뷰</button>
             </div>
         </div>
 
-        <!-- 로딩 메시지 -->
-        <div id="loadingMessage">
-            <div>⏳</div>
-            <div>구글시트 데이터 불러오는 중...</div>
+        <div id="loadingDiv" class="loading" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p>데이터를 불러오는 중...</p>
         </div>
 
-        <!-- 카드사별 현황 -->
-        <div class="cards-grid hidden" id="cardsGrid"></div>
+        <div id="errorDiv" class="error" style="display: none;"></div>
 
-        <!-- 테이블 뷰 -->
-        <div class="table-container hidden" id="tableView">
-            <table id="cardTable">
+        <div id="cardsGrid" class="cards-grid"></div>
+
+        <div id="tableView" class="table-container" style="display: none;">
+            <table>
                 <thead>
-                    <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <tr>
                         <th>카드사</th>
-                        <th>최대<br>할부</th>
-                        <th>월 한도</th>
-                        <th>일시불<br>사용</th>
-                        <th>할부<br>사용</th>
-                        <th>총 사용</th>
-                        <th>잔여한도</th>
+                        <th>할부한도</th>
+                        <th>총한도</th>
+                        <th>일시불</th>
+                        <th>할부</th>
+                        <th>사용액</th>
+                        <th>잔여액</th>
                         <th>사용률</th>
                     </tr>
                 </thead>
-                <tbody id="cardTableBody">
-                </tbody>
+                <tbody id="cardTableBody"></tbody>
             </table>
+        </div>
+
+        <!-- 월별 결제 내역 섹션 -->
+        <div id="paymentHistorySection" class="payment-history-section">
+            <div class="payment-history-header">
+                <div class="payment-history-title">📋 월별 결제 내역</div>
+                <div class="payment-count" id="paymentCount">0건</div>
+            </div>
+            
+            <div class="payment-history-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>결제일자</th>
+                            <th>카드사</th>
+                            <th>결제금액</th>
+                            <th>할부개월</th>
+                            <th>성명</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentHistoryBody"></tbody>
+                </table>
+            </div>
+
+            <div class="payment-summary" id="paymentSummary">
+                <div class="payment-summary-item">
+                    <div class="payment-summary-label">총 결제 건수</div>
+                    <div class="payment-summary-value" id="totalCount">0건</div>
+                </div>
+                <div class="payment-summary-item">
+                    <div class="payment-summary-label">일시불 합계</div>
+                    <div class="payment-summary-value" id="totalLumpSum">0원</div>
+                </div>
+                <div class="payment-summary-item">
+                    <div class="payment-summary-label">할부 합계</div>
+                    <div class="payment-summary-value" id="totalInstallment">0원</div>
+                </div>
+                <div class="payment-summary-item">
+                    <div class="payment-summary-label">전체 합계</div>
+                    <div class="payment-summary-value" id="totalAmount">0원</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // ========================================
-        // 구글시트 연동 설정 (여기에 정보를 입력하세요)
-        // ========================================
-        const SHEET_CONFIG = {
-            sheetUrl: 'https://docs.google.com/spreadsheets/d/1kdODHkfbibudLz9H-gDZfNViSKRw2zluZeIhvcjca7c/edit',
-            sheetName: '시트1',
-            apiKey: 'AIzaSyAVtAzm9UjgGB1pqChvGvGKH7RpH0KCiVM'
-        };
-        // ========================================
-
-        // 전역 변수
         let sheetData = [];
-        let cardLimits = {};
-        let currentMonth = '10';
+        let currentMonth = new Date().getMonth() + 1;
         let viewMode = 'cards';
 
-        // 카드사별 한도 초기화
-        function initializeCardLimits() {
-            cardLimits = {
-                '국민': { 
-                    '10': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 },
-                    '11': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 },
-                    '12': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 }
-                },
-                '농협': { 
-                    '10': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 },
-                    '11': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 },
-                    '12': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 }
-                },
-                '롯데': { 
-                    '10': { lumpSum: 6000000, installment: 0, maxInstallmentMonths: 24 },
-                    '11': { lumpSum: 6000000, installment: 0, maxInstallmentMonths: 24 },
-                    '12': { lumpSum: 6000000, installment: 0, maxInstallmentMonths: 24 }
-                },
-                '비씨': { 
-                    '10': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 },
-                    '11': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 },
-                    '12': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 }
-                },
-                '삼성': { 
-                    '10': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 },
-                    '11': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 },
-                    '12': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 }
-                },
-                '신한': { 
-                    '10': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 },
-                    '11': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 },
-                    '12': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 }
-                },
-                '하나': { 
-                    '10': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 },
-                    '11': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 },
-                    '12': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 }
-                },
-                '현대': { 
-                    '10': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
-                    '11': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
-                    '12': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 }
-                }
-            };
-        }
+        const SHEET_ID = '1vE1dsPo8WLCBFL8zSYwMTZtf1njL11p63xKLn78iDvY';
+        const API_KEY = 'AIzaSyDtEwT7RzXMTB0r8eQ0aS4w6F_0jTZcK0g';
 
-        // 구글시트 자동 연동
-        async function autoConnectSheet() {
-            const sheetUrl = SHEET_CONFIG.sheetUrl;
-            const sheetName = SHEET_CONFIG.sheetName;
-            const apiKey = SHEET_CONFIG.apiKey;
-
-            if (sheetUrl.includes('YOUR_SHEET_ID') || apiKey === 'YOUR_API_KEY') {
-                document.getElementById('loadingMessage').innerHTML = `
-                    <div>⚠️</div>
-                    <div style="color: #f5576c; margin-bottom: 10px;">구글시트 설정이 필요합니다</div>
-                    <div style="font-size: 12px; color: #666;">HTML 파일의 SHEET_CONFIG 설정</div>
-                `;
-                return;
+        // 카드별 한도 설정
+        const cardLimits = {
+            '국민': {
+                '1': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '2': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '3': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '4': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '5': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '6': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '7': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '8': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '9': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '10': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '11': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '12': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 }
+            },
+            '하나': {
+                '1': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '2': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '3': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '4': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '5': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '6': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '7': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '8': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '9': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '10': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '11': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 },
+                '12': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 0 }
+            },
+            '현대': {
+                '1': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '2': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '3': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '4': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '5': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '6': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '7': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '8': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '9': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '10': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '11': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '12': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 }
+            },
+            '신한': {
+                '1': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '2': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '3': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '4': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '5': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '6': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '7': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '8': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '9': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '10': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '11': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 },
+                '12': { lumpSum: 3000000, installment: 0, maxInstallmentMonths: 0 }
+            },
+            '삼성': {
+                '1': { lumpSum: 2000000, installment: 3000000, maxInstallmentMonths: 10 },
+                '2': { lumpSum: 2000000, installment: 3000000, maxInstallmentMonths: 10 },
+                '3': { lumpSum: 2000000, installment: 3000000, maxInstallmentMonths: 10 },
+                '4': { lumpSum: 2000000, installment: 3000000, maxInstallmentMonths: 10 },
+                '5': { lumpSum: 2000000, installment: 3000000, maxInstallmentMonths: 10 },
+                '6': { lumpSum: 2000000, installment: 3000000, maxInstallmentMonths: 10 },
+                '7': { lumpSum: 2000000, installment: 3000000, maxInstallmentMonths: 10 },
+                '8': { lumpSum: 2000000, installment: 3000000, maxInstallmentMonths: 10 },
+                '9': { lumpSum: 2000000, installment: 3000000, maxInstallmentMonths: 10 },
+                '10': { lumpSum: 2000000, installment: 3000000, maxInstallmentMonths: 10 },
+                '11': { lumpSum: 2000000, installment: 3000000, maxInstallmentMonths: 10 },
+                '12': { lumpSum: 2000000, installment: 3000000, maxInstallmentMonths: 10 }
+            },
+            '롯데': {
+                '1': { lumpSum: 2000000, installment: 0, maxInstallmentMonths: 0 },
+                '2': { lumpSum: 2000000, installment: 0, maxInstallmentMonths: 0 },
+                '3': { lumpSum: 2000000, installment: 0, maxInstallmentMonths: 0 },
+                '4': { lumpSum: 2000000, installment: 0, maxInstallmentMonths: 0 },
+                '5': { lumpSum: 2000000, installment: 0, maxInstallmentMonths: 0 },
+                '6': { lumpSum: 2000000, installment: 0, maxInstallmentMonths: 0 },
+                '7': { lumpSum: 2000000, installment: 0, maxInstallmentMonths: 0 },
+                '8': { lumpSum: 2000000, installment: 0, maxInstallmentMonths: 0 },
+                '9': { lumpSum: 2000000, installment: 0, maxInstallmentMonths: 0 },
+                '10': { lumpSum: 2000000, installment: 0, maxInstallmentMonths: 0 },
+                '11': { lumpSum: 2000000, installment: 0, maxInstallmentMonths: 0 },
+                '12': { lumpSum: 2000000, installment: 0, maxInstallmentMonths: 0 }
+            },
+            '농협': {
+                '1': { lumpSum: 1000000, installment: 0, maxInstallmentMonths: 0 },
+                '2': { lumpSum: 1000000, installment: 0, maxInstallmentMonths: 0 },
+                '3': { lumpSum: 1000000, installment: 0, maxInstallmentMonths: 0 },
+                '4': { lumpSum: 1000000, installment: 0, maxInstallmentMonths: 0 },
+                '5': { lumpSum: 1000000, installment: 0, maxInstallmentMonths: 0 },
+                '6': { lumpSum: 1000000, installment: 0, maxInstallmentMonths: 0 },
+                '7': { lumpSum: 1000000, installment: 0, maxInstallmentMonths: 0 },
+                '8': { lumpSum: 1000000, installment: 0, maxInstallmentMonths: 0 },
+                '9': { lumpSum: 1000000, installment: 0, maxInstallmentMonths: 0 },
+                '10': { lumpSum: 1000000, installment: 0, maxInstallmentMonths: 0 },
+                '11': { lumpSum: 1000000, installment: 0, maxInstallmentMonths: 0 },
+                '12': { lumpSum: 1000000, installment: 0, maxInstallmentMonths: 0 }
             }
+        };
 
-            try {
-                const sheetId = extractSheetId(sheetUrl);
-                const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
+        // 월 선택 이벤트
+        document.getElementById('monthSelect').addEventListener('change', function(e) {
+            currentMonth = e.target.value;
+            updateDisplay();
+            updatePaymentHistory();
+        });
 
-                const response = await fetch(url);
-                const data = await response.json();
-
-                if (data.error) {
-                    throw new Error(data.error.message || '시트 연동 실패');
-                }
-
-                if (data.values && data.values.length > 0) {
-                    processSheetData(data.values);
-                    
-                    document.getElementById('loadingMessage').classList.add('hidden');
-                    if (viewMode === 'table') {
-                        document.getElementById('tableView').classList.remove('hidden');
-                    } else {
-                        document.getElementById('cardsGrid').classList.remove('hidden');
-                    }
-                    
-                    updateDisplay();
-                } else {
-                    document.getElementById('loadingMessage').innerHTML = `
-                        <div>📭</div>
-                        <div style="color: #f5576c;">시트에 데이터가 없습니다</div>
-                    `;
-                }
-            } catch (error) {
-                document.getElementById('loadingMessage').innerHTML = `
-                    <div>❌</div>
-                    <div style="color: #f5576c; margin-bottom: 10px;">연동 실패</div>
-                    <div style="font-size: 12px; color: #666; margin-bottom: 15px;">${error.message}</div>
-                    <button onclick="reloadSheetData()" class="btn btn-primary">다시 시도</button>
-                `;
-            }
-        }
-
-        // 데이터 새로고침
-        async function reloadSheetData() {
-            document.getElementById('loadingMessage').classList.remove('hidden');
-            document.getElementById('loadingMessage').innerHTML = `
-                <div>⏳</div>
-                <div>구글시트 데이터 불러오는 중...</div>
-            `;
-            document.getElementById('cardsGrid').classList.add('hidden');
-            document.getElementById('tableView').classList.add('hidden');
+        // 화면 전환
+        function switchView(mode) {
+            viewMode = mode;
+            const cardsGrid = document.getElementById('cardsGrid');
+            const tableView = document.getElementById('tableView');
             
-            await autoConnectSheet();
-        }
-
-        // 시트 ID 추출
-        function extractSheetId(url) {
-            const match = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
-            return match ? match[1] : null;
-        }
-
-        // 시트 데이터 처리
-        function processSheetData(values) {
-            sheetData = [];
-            initializeCardLimits();
-            
-            for (let i = 1; i < values.length; i++) {
-                const row = values[i];
-                if (row.length >= 5) {
-                    sheetData.push({
-                        date: row[0],
-                        card: row[1],
-                        amount: parseInt(row[2].toString().replace(/,/g, '')),
-                        installment: row[3],
-                        type: row[4]
-                    });
-                }
-            }
-        }
-
-        // 뷰 모드 전환
-        function toggleView() {
-            if (viewMode === 'cards') {
-                viewMode = 'table';
-                document.getElementById('cardsGrid').classList.add('hidden');
-                document.getElementById('tableView').classList.remove('hidden');
-                document.getElementById('viewToggleBtn').innerHTML = '💳 카드보기';
-                updateTableDisplay();
+            if (mode === 'cards') {
+                cardsGrid.style.display = 'grid';
+                tableView.style.display = 'none';
             } else {
-                viewMode = 'cards';
-                document.getElementById('tableView').classList.add('hidden');
-                document.getElementById('cardsGrid').classList.remove('hidden');
-                document.getElementById('viewToggleBtn').innerHTML = '📊 테이블보기';
+                cardsGrid.style.display = 'none';
+                tableView.style.display = 'block';
             }
+            
+            updateDisplay();
+        }
+
+        // 자동 연결
+        function autoConnectSheet() {
+            const monthSelect = document.getElementById('monthSelect');
+            monthSelect.value = currentMonth;
+            loadSheetData();
+        }
+
+        // 구글 시트 데이터 로드
+        function loadSheetData() {
+            const loadingDiv = document.getElementById('loadingDiv');
+            const errorDiv = document.getElementById('errorDiv');
+            
+            loadingDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+
+            const range = 'A2:F';
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${range}?key=${API_KEY}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    loadingDiv.style.display = 'none';
+                    
+                    if (data.values) {
+                        sheetData = data.values.map(row => ({
+                            date: row[0] || '',
+                            card: row[1] || '',
+                            amount: parseInt(row[2]) || 0,
+                            installment: row[3] || '',
+                            type: row[4] || '',
+                            name: row[5] || ''
+                        }));
+                        
+                        updateDisplay();
+                        updatePaymentHistory();
+                    } else {
+                        showError('데이터가 없습니다.');
+                    }
+                })
+                .catch(error => {
+                    loadingDiv.style.display = 'none';
+                    showError('데이터를 불러오는데 실패했습니다: ' + error.message);
+                });
+        }
+
+        // 에러 표시
+        function showError(message) {
+            const errorDiv = document.getElementById('errorDiv');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
         }
 
         // 화면 업데이트
         function updateDisplay() {
-            currentMonth = document.getElementById('monthSelect').value;
             const cardsGrid = document.getElementById('cardsGrid');
             cardsGrid.innerHTML = '';
 
@@ -689,83 +796,79 @@
             Object.keys(cardLimits).forEach(cardName => {
                 const limits = cardLimits[cardName][currentMonth];
                 const usage = cardUsage[cardName] || { lumpSum: 0, installment: 0 };
-                const isSamsung = cardName === '삼성';
                 
+                const isSamsung = cardName === '삼성';
                 let cardHtml = '';
+                let totalLimit, totalUsed, balance, usagePercent;
                 
                 if (isSamsung) {
                     const lumpSumBalance = limits.lumpSum - usage.lumpSum;
                     const installmentBalance = limits.installment - usage.installment;
-                    const lumpSumPercent = limits.lumpSum > 0 ? (usage.lumpSum / limits.lumpSum * 100).toFixed(1) : 0;
-                    const installmentPercent = limits.installment > 0 ? (usage.installment / limits.installment * 100).toFixed(1) : 0;
-                    
+                    totalLimit = limits.lumpSum + limits.installment;
+                    totalUsed = usage.lumpSum + usage.installment;
+                    balance = lumpSumBalance + installmentBalance;
+                    usagePercent = totalLimit > 0 ? (totalUsed / totalLimit * 100).toFixed(1) : 0;
+
                     cardHtml = `
                         <div class="card-item">
                             <div class="card-name">
-                                <span>${cardName}</span>
-                                <span class="card-installment-badge">최대 ${limits.maxInstallmentMonths}개월</span>
+                                ${cardName}
+                                <span class="card-installment-badge">${limits.maxInstallmentMonths}개월</span>
                             </div>
-                            
-                            <div style="background: #f8f9fa; padding: 12px; border-radius: 10px; margin-bottom: 12px;">
-                                <div style="font-weight: 700; color: #667eea; margin-bottom: 8px; font-size: 13px;">일시불</div>
-                                <div class="card-info">
-                                    <div class="card-info-label">한도</div>
-                                    <div class="card-info-value limit-amount">${formatNumber(limits.lumpSum)}원</div>
+
+                            <div class="card-info">
+                                <div class="card-info-label">총한도</div>
+                                <div class="card-info-value limit-amount">${formatNumber(totalLimit)}원</div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0;">
+                                <div style="background: #e3f2fd; padding: 8px; border-radius: 8px;">
+                                    <div style="font-size: 10px; color: #666; margin-bottom: 4px;">일시불 한도</div>
+                                    <div style="font-weight: 700; color: #1976d2; font-size: 13px;">${formatNumber(limits.lumpSum)}원</div>
+                                    <div style="font-size: 10px; color: #666; margin-top: 2px;">사용: ${formatNumber(usage.lumpSum)}원</div>
+                                    <div style="font-weight: 700; color: ${lumpSumBalance > limits.lumpSum * 0.3 ? '#1976d2' : (lumpSumBalance > 0 ? '#ff9800' : '#f44336')}; font-size: 12px; margin-top: 2px;">잔여: ${formatNumber(lumpSumBalance)}원</div>
                                 </div>
-                                <div class="card-info">
-                                    <div class="card-info-label">사용</div>
-                                    <div class="card-info-value used-amount">${formatNumber(usage.lumpSum)}원</div>
-                                </div>
-                                <div class="card-info">
-                                    <div class="card-info-label">잔액</div>
-                                    <div class="balance-amount" style="font-size: 18px;">${formatNumber(lumpSumBalance)}원</div>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: ${Math.min(lumpSumPercent, 100)}%"></div>
-                                </div>
-                                <div style="text-align: center; margin-top: 5px; font-size: 11px; color: #666;">
-                                    사용률: ${lumpSumPercent}%
+                                <div style="background: #fce4ec; padding: 8px; border-radius: 8px;">
+                                    <div style="font-size: 10px; color: #666; margin-bottom: 4px;">할부 한도</div>
+                                    <div style="font-weight: 700; color: #c2185b; font-size: 13px;">${formatNumber(limits.installment)}원</div>
+                                    <div style="font-size: 10px; color: #666; margin-top: 2px;">사용: ${formatNumber(usage.installment)}원</div>
+                                    <div style="font-weight: 700; color: ${installmentBalance > limits.installment * 0.3 ? '#c2185b' : (installmentBalance > 0 ? '#ff9800' : '#f44336')}; font-size: 12px; margin-top: 2px;">잔여: ${formatNumber(installmentBalance)}원</div>
                                 </div>
                             </div>
 
-                            <div style="background: #f8f9fa; padding: 12px; border-radius: 10px;">
-                                <div style="font-weight: 700; color: #f5576c; margin-bottom: 8px; font-size: 13px;">할부</div>
-                                <div class="card-info">
-                                    <div class="card-info-label">한도</div>
-                                    <div class="card-info-value limit-amount">${formatNumber(limits.installment)}원</div>
-                                </div>
-                                <div class="card-info">
-                                    <div class="card-info-label">사용</div>
-                                    <div class="card-info-value used-amount">${formatNumber(usage.installment)}원</div>
-                                </div>
-                                <div class="card-info">
-                                    <div class="card-info-label">잔액</div>
-                                    <div class="balance-amount" style="font-size: 18px;">${formatNumber(installmentBalance)}원</div>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: ${Math.min(installmentPercent, 100)}%"></div>
-                                </div>
-                                <div style="text-align: center; margin-top: 5px; font-size: 11px; color: #666;">
-                                    사용률: ${installmentPercent}%
-                                </div>
+                            <div class="card-info">
+                                <div class="card-info-label">총 사용금액</div>
+                                <div class="card-info-value used-amount">${formatNumber(totalUsed)}원</div>
+                            </div>
+
+                            <div class="card-info">
+                                <div class="card-info-label">총 잔여한도</div>
+                                <div class="balance-amount ${balance <= totalLimit * 0.3 && balance > 0 ? 'balance-warning' : ''} ${balance <= 0 ? 'balance-danger' : ''}">${formatNumber(balance)}원</div>
+                            </div>
+
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${Math.min(usagePercent, 100)}%"></div>
+                            </div>
+                            <div style="text-align: center; margin-top: 5px; font-size: 11px; color: #666;">
+                                사용률: ${usagePercent}%
                             </div>
                         </div>
                     `;
                 } else {
-                    const totalLimit = limits.lumpSum + limits.installment;
-                    const totalUsed = usage.lumpSum + usage.installment;
-                    const balance = totalLimit - totalUsed;
-                    const usagePercent = totalLimit > 0 ? (totalUsed / totalLimit * 100).toFixed(1) : 0;
-                    
+                    totalLimit = limits.lumpSum + limits.installment;
+                    totalUsed = usage.lumpSum + usage.installment;
+                    balance = totalLimit - totalUsed;
+                    usagePercent = totalLimit > 0 ? (totalUsed / totalLimit * 100).toFixed(1) : 0;
+
                     cardHtml = `
                         <div class="card-item">
                             <div class="card-name">
-                                <span>${cardName}</span>
-                                <span class="card-installment-badge">최대 ${limits.maxInstallmentMonths}개월</span>
+                                ${cardName}
+                                ${limits.maxInstallmentMonths > 0 ? `<span class="card-installment-badge">${limits.maxInstallmentMonths}개월</span>` : ''}
                             </div>
-                            
+
                             <div class="card-info">
-                                <div class="card-info-label">월 키인 한도 (일시불+할부)</div>
+                                <div class="card-info-label">총한도</div>
                                 <div class="card-info-value limit-amount">${formatNumber(totalLimit)}원</div>
                             </div>
 
@@ -787,7 +890,7 @@
 
                             <div class="card-info">
                                 <div class="card-info-label">잔여한도</div>
-                                <div class="balance-amount">${formatNumber(balance)}원</div>
+                                <div class="balance-amount ${balance <= totalLimit * 0.3 && balance > 0 ? 'balance-warning' : ''} ${balance <= 0 ? 'balance-danger' : ''}">${formatNumber(balance)}원</div>
                             </div>
 
                             <div class="progress-bar">
@@ -938,6 +1041,92 @@
             `;
 
             tableBody.innerHTML += summaryRow;
+        }
+
+        // 월별 결제 내역 업데이트
+        function updatePaymentHistory() {
+            const historyBody = document.getElementById('paymentHistoryBody');
+            const paymentCount = document.getElementById('paymentCount');
+            
+            // 현재 월의 키인 결제 내역만 필터링
+            const monthPayments = sheetData.filter(item => {
+                const monthMatch = item.date.match(/(\d+)월/);
+                if (!monthMatch) return false;
+                const month = monthMatch[1];
+                return month === currentMonth && item.type === '키인';
+            });
+
+            // 날짜순 정렬
+            monthPayments.sort((a, b) => {
+                const dateA = a.date.match(/(\d+)월(\d+)일/);
+                const dateB = b.date.match(/(\d+)월(\d+)일/);
+                if (!dateA || !dateB) return 0;
+                
+                const monthA = parseInt(dateA[1]);
+                const dayA = parseInt(dateA[2]);
+                const monthB = parseInt(dateB[1]);
+                const dayB = parseInt(dateB[2]);
+                
+                if (monthA !== monthB) return monthA - monthB;
+                return dayA - dayB;
+            });
+
+            // 결제 건수 표시
+            paymentCount.textContent = `${monthPayments.length}건`;
+
+            // 테이블 내용 생성
+            if (monthPayments.length === 0) {
+                historyBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 40px; color: #999;">
+                            <div class="empty-history">
+                                <div class="empty-history-icon">📭</div>
+                                <div>${currentMonth}월 결제 내역이 없습니다.</div>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            } else {
+                historyBody.innerHTML = monthPayments.map((payment, index) => {
+                    const bgColor = index % 2 === 0 ? 'white' : '#f8f9fa';
+                    const installmentClass = payment.installment === '일시불' ? 'lumpsum' : 'installment';
+                    
+                    return `
+                        <tr style="background: ${bgColor};">
+                            <td class="payment-row-date">${payment.date}</td>
+                            <td class="payment-row-card">${payment.card}</td>
+                            <td class="payment-row-amount">${formatNumber(payment.amount)}원</td>
+                            <td>
+                                <span class="payment-row-installment ${installmentClass}">
+                                    ${payment.installment}
+                                </span>
+                            </td>
+                            <td class="payment-row-name">${payment.name}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            // 합계 계산
+            let totalCount = monthPayments.length;
+            let totalLumpSum = 0;
+            let totalInstallment = 0;
+            let totalAmount = 0;
+
+            monthPayments.forEach(payment => {
+                totalAmount += payment.amount;
+                if (payment.installment === '일시불') {
+                    totalLumpSum += payment.amount;
+                } else {
+                    totalInstallment += payment.amount;
+                }
+            });
+
+            // 합계 표시
+            document.getElementById('totalCount').textContent = `${totalCount}건`;
+            document.getElementById('totalLumpSum').textContent = formatNumber(totalLumpSum) + '원';
+            document.getElementById('totalInstallment').textContent = formatNumber(totalInstallment) + '원';
+            document.getElementById('totalAmount').textContent = formatNumber(totalAmount) + '원';
         }
 
         // 숫자 포맷 (천단위 구분)
