@@ -586,8 +586,12 @@
         let currentMonth = new Date().getMonth() + 1;
         let viewMode = 'cards';
 
-        const SHEET_ID = '1vE1dsPo8WLCBFL8zSYwMTZtf1njL11p63xKLn78iDvY';
-        const API_KEY = 'AIzaSyDtEwT7RzXMTB0r8eQ0aS4w6F_0jTZcK0g';
+        // ========================================
+        // 📌 구글 시트 연결 설정 (사용자 정보)
+        // ========================================
+        const SHEET_ID = '1kdODHkfbibudLz9H-gDZfNViSKRw2zluZeIhvcjca7c';
+        const API_KEY = 'AIzaSyAVtAzm9UjgGB1pqChvGvGKH7RpH0KCiVM';
+        const SHEET_NAME = '시트1';
 
         // 카드별 한도 설정
         const cardLimits = {
@@ -730,7 +734,7 @@
             loadingDiv.style.display = 'block';
             errorDiv.style.display = 'none';
 
-            const range = 'A2:F';
+            const range = SHEET_NAME + '!A2:F';
             const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${range}?key=${API_KEY}`;
 
             fetch(url)
