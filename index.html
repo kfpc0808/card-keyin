@@ -719,7 +719,7 @@
         // 전역 변수
         let sheetData = [];
         let cardLimits = {};
-        let currentMonth = '10';
+        let currentMonth = String(new Date().getMonth() + 1); // 현재 월 자동 설정
         let viewMode = 'cards';
 
         // 카드사별 한도 초기화
@@ -1264,6 +1264,10 @@
         // 페이지 로드 시
         document.addEventListener('DOMContentLoaded', function() {
             console.log('카드사별 키인 한도 관리 시스템 로드 완료');
+            
+            // 현재 월로 월 선택 박스 설정
+            document.getElementById('monthSelect').value = currentMonth;
+            
             autoConnectSheet();
         });
     </script>
