@@ -624,9 +624,7 @@
             <div class="month-controls">
                 <label>조회 월:</label>
                 <select id="monthSelect" onchange="updateDisplay()">
-                    <option value="10">10월</option>
-                    <option value="11">11월</option>
-                    <option value="12">12월</option>
+                    <!-- 동적으로 생성됨 -->
                 </select>
                 <button onclick="reloadSheetData()" class="btn btn-secondary">🔄 새로고침</button>
                 <button onclick="toggleView()" id="viewToggleBtn" class="btn btn-primary">📊 테이블보기</button>
@@ -719,48 +717,121 @@
         // 전역 변수
         let sheetData = [];
         let cardLimits = {};
-        let currentMonth = String(new Date().getMonth() + 1); // 현재 월 자동 설정
+        let currentYearMonth = ''; // 현재 선택된 연월 (예: '2025-1')
+        let availableMonths = []; // 데이터에 존재하는 연월 목록
         let viewMode = 'cards';
 
         // 카드사별 한도 초기화
         function initializeCardLimits() {
             cardLimits = {
                 '국민': { 
+                    '1': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 },
+                    '2': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 },
+                    '3': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 },
+                    '4': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 },
+                    '5': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 },
+                    '6': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 },
+                    '7': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 },
+                    '8': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 },
+                    '9': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 },
                     '10': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 },
                     '11': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 },
                     '12': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 18 }
                 },
                 '농협': { 
+                    '1': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 },
+                    '2': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 },
+                    '3': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 },
+                    '4': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 },
+                    '5': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 },
+                    '6': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 },
+                    '7': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 },
+                    '8': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 },
+                    '9': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 },
                     '10': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 },
                     '11': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 },
                     '12': { lumpSum: 30000000, installment: 0, maxInstallmentMonths: 24 }
                 },
                 '롯데': { 
+                    '1': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '2': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '3': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '4': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '5': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '6': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '7': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '8': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '9': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
                     '10': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
                     '11': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
                     '12': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 }
                 },
                 '비씨': { 
+                    '1': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 },
+                    '2': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 },
+                    '3': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 },
+                    '4': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 },
+                    '5': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 },
+                    '6': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 },
+                    '7': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 },
+                    '8': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 },
+                    '9': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 },
                     '10': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 },
                     '11': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 },
                     '12': { lumpSum: 20000000, installment: 0, maxInstallmentMonths: 6 }
                 },
                 '삼성': { 
+                    '1': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 },
+                    '2': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 },
+                    '3': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 },
+                    '4': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 },
+                    '5': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 },
+                    '6': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 },
+                    '7': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 },
+                    '8': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 },
+                    '9': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 },
                     '10': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 },
                     '11': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 },
                     '12': { lumpSum: 5000000, installment: 5000000, maxInstallmentMonths: 6 }
                 },
                 '신한': { 
+                    '1': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 },
+                    '2': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 },
+                    '3': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 },
+                    '4': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 },
+                    '5': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 },
+                    '6': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 },
+                    '7': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 },
+                    '8': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 },
+                    '9': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 },
                     '10': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 },
                     '11': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 },
                     '12': { lumpSum: 10000000, installment: 0, maxInstallmentMonths: 6 }
                 },
                 '하나': { 
+                    '1': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 },
+                    '2': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 },
+                    '3': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 },
+                    '4': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 },
+                    '5': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 },
+                    '6': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 },
+                    '7': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 },
+                    '8': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 },
+                    '9': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 },
                     '10': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 },
                     '11': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 },
                     '12': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 12 }
                 },
                 '현대': { 
+                    '1': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '2': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '3': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '4': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '5': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '6': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '7': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '8': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
+                    '9': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
                     '10': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
                     '11': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 },
                     '12': { lumpSum: 5000000, installment: 0, maxInstallmentMonths: 24 }
@@ -845,19 +916,68 @@
             sheetData = [];
             initializeCardLimits();
             
+            const yearMonthSet = new Set(); // 존재하는 연월 저장
+            
             for (let i = 1; i < values.length; i++) {
                 const row = values[i];
                 if (row.length >= 5) {
-                    sheetData.push({
-                        date: row[0],
-                        card: row[1],
-                        amount: parseInt(row[2].toString().replace(/,/g, '')),
-                        installment: row[3],
-                        type: row[4],
-                        name: row[5] || ''  // F열: 성명
-                    });
+                    const dateStr = row[0];
+                    
+                    // 연월일 형식 파싱: "2025년1월2일" 또는 "1월2일"
+                    const dateMatch = dateStr.match(/(?:(\d{4})년)?(\d+)월(\d+)일/);
+                    
+                    if (dateMatch) {
+                        const year = dateMatch[1] || new Date().getFullYear().toString(); // 연도 없으면 현재 연도
+                        const month = dateMatch[2];
+                        const yearMonth = `${year}-${month}`; // "2025-1" 형식
+                        
+                        yearMonthSet.add(yearMonth);
+                        
+                        sheetData.push({
+                            date: dateStr,
+                            year: year,
+                            month: month,
+                            yearMonth: yearMonth,
+                            card: row[1],
+                            amount: parseInt(row[2].toString().replace(/,/g, '')),
+                            installment: row[3],
+                            type: row[4],
+                            name: row[5] || ''
+                        });
+                    }
                 }
             }
+            
+            // 연월 목록 정렬 (최신순)
+            availableMonths = Array.from(yearMonthSet).sort((a, b) => {
+                const [yearA, monthA] = a.split('-').map(Number);
+                const [yearB, monthB] = b.split('-').map(Number);
+                if (yearA !== yearB) return yearB - yearA; // 연도 내림차순
+                return monthB - monthA; // 월 내림차순
+            });
+            
+            // 월 선택 박스 생성
+            generateMonthSelector();
+            
+            // 최근 월 자동 선택
+            if (availableMonths.length > 0) {
+                currentYearMonth = availableMonths[0]; // 최근 월
+                document.getElementById('monthSelect').value = currentYearMonth;
+            }
+        }
+        
+        // 월 선택 박스 동적 생성
+        function generateMonthSelector() {
+            const selectElement = document.getElementById('monthSelect');
+            selectElement.innerHTML = ''; // 기존 옵션 제거
+            
+            availableMonths.forEach(yearMonth => {
+                const [year, month] = yearMonth.split('-');
+                const option = document.createElement('option');
+                option.value = yearMonth;
+                option.textContent = `${year}년 ${month}월`;
+                selectElement.appendChild(option);
+            });
         }
 
         // 뷰 모드 전환
@@ -878,19 +998,17 @@
 
         // 화면 업데이트
         function updateDisplay() {
-            currentMonth = document.getElementById('monthSelect').value;
+            currentYearMonth = document.getElementById('monthSelect').value;
+            const [year, month] = currentYearMonth.split('-');
+            
             const cardsGrid = document.getElementById('cardsGrid');
             cardsGrid.innerHTML = '';
 
             const cardUsage = {};
             
             sheetData.forEach(item => {
-                const monthMatch = item.date.match(/(\d+)월/);
-                if (!monthMatch) return;
-                
-                const month = monthMatch[1];
-                
-                if (month === currentMonth && item.type === '키인') {
+                // 선택된 연월과 일치하는 키인 데이터만 필터링
+                if (item.yearMonth === currentYearMonth && item.type === '키인') {
                     if (!cardUsage[item.card]) {
                         cardUsage[item.card] = { lumpSum: 0, installment: 0 };
                     }
@@ -904,7 +1022,7 @@
             });
 
             Object.keys(cardLimits).forEach(cardName => {
-                const limits = cardLimits[cardName][currentMonth];
+                const limits = cardLimits[cardName][month];
                 const usage = cardUsage[cardName] || { lumpSum: 0, installment: 0 };
                 const isSamsung = cardName === '삼성';
                 
@@ -1030,18 +1148,16 @@
 
         // 테이블 화면 업데이트
         function updateTableDisplay() {
+            const [year, month] = currentYearMonth.split('-');
+            
             const tableBody = document.getElementById('cardTableBody');
             tableBody.innerHTML = '';
 
             const cardUsage = {};
             
             sheetData.forEach(item => {
-                const monthMatch = item.date.match(/(\d+)월/);
-                if (!monthMatch) return;
-                
-                const month = monthMatch[1];
-                
-                if (month === currentMonth && item.type === '키인') {
+                // 선택된 연월과 일치하는 키인 데이터만 필터링
+                if (item.yearMonth === currentYearMonth && item.type === '키인') {
                     if (!cardUsage[item.card]) {
                         cardUsage[item.card] = { lumpSum: 0, installment: 0 };
                     }
@@ -1055,7 +1171,7 @@
             });
 
             Object.keys(cardLimits).forEach((cardName, index) => {
-                const limits = cardLimits[cardName][currentMonth];
+                const limits = cardLimits[cardName][month];
                 const usage = cardUsage[cardName] || { lumpSum: 0, installment: 0 };
                 
                 const isSamsung = cardName === '삼성';
@@ -1126,7 +1242,7 @@
             let totalAllUsed = 0;
 
             Object.keys(cardLimits).forEach(cardName => {
-                const limits = cardLimits[cardName][currentMonth];
+                const limits = cardLimits[cardName][month];
                 const usage = cardUsage[cardName] || { lumpSum: 0, installment: 0 };
                 
                 totalAllLimit += limits.lumpSum + limits.installment;
@@ -1177,28 +1293,30 @@
         // 월별 결제 내역 업데이트 함수
         // ========================================
         function updatePaymentHistory() {
+            const [year, month] = currentYearMonth.split('-');
+            
             const historyBody = document.getElementById('paymentHistoryBody');
             const paymentCount = document.getElementById('paymentCount');
             
-            // 현재 월의 키인 결제 내역만 필터링
+            // 현재 연월의 키인 결제 내역만 필터링
             const monthPayments = sheetData.filter(item => {
-                const monthMatch = item.date.match(/(\d+)월/);
-                if (!monthMatch) return false;
-                const month = monthMatch[1];
-                return month === currentMonth && item.type === '키인';
+                return item.yearMonth === currentYearMonth && item.type === '키인';
             });
 
-            // 날짜순 정렬
+            // 날짜순 정렬 (연월일 기준)
             monthPayments.sort((a, b) => {
-                const dateA = a.date.match(/(\d+)월(\d+)일/);
-                const dateB = b.date.match(/(\d+)월(\d+)일/);
+                const dateA = a.date.match(/(\d{4})년(\d+)월(\d+)일/);
+                const dateB = b.date.match(/(\d{4})년(\d+)월(\d+)일/);
                 if (!dateA || !dateB) return 0;
                 
-                const monthA = parseInt(dateA[1]);
-                const dayA = parseInt(dateA[2]);
-                const monthB = parseInt(dateB[1]);
-                const dayB = parseInt(dateB[2]);
+                const yearA = parseInt(dateA[1]);
+                const monthA = parseInt(dateA[2]);
+                const dayA = parseInt(dateA[3]);
+                const yearB = parseInt(dateB[1]);
+                const monthB = parseInt(dateB[2]);
+                const dayB = parseInt(dateB[3]);
                 
+                if (yearA !== yearB) return yearA - yearB;
                 if (monthA !== monthB) return monthA - monthB;
                 return dayA - dayB;
             });
@@ -1213,7 +1331,7 @@
                         <td colspan="5" style="text-align: center; padding: 40px; color: #999;">
                             <div class="empty-history">
                                 <div class="empty-history-icon">📭</div>
-                                <div>${currentMonth}월 결제 내역이 없습니다.</div>
+                                <div>${year}년 ${month}월 결제 내역이 없습니다.</div>
                             </div>
                         </td>
                     </tr>
@@ -1264,10 +1382,7 @@
         // 페이지 로드 시
         document.addEventListener('DOMContentLoaded', function() {
             console.log('카드사별 키인 한도 관리 시스템 로드 완료');
-            
-            // 현재 월로 월 선택 박스 설정
-            document.getElementById('monthSelect').value = currentMonth;
-            
+            // 데이터 로드 후 processSheetData에서 자동으로 최근 월 선택
             autoConnectSheet();
         });
     </script>
