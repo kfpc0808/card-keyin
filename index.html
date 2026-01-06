@@ -709,7 +709,7 @@
         // ========================================
         const SHEET_CONFIG = {
             sheetUrl: 'https://docs.google.com/spreadsheets/d/1kdODHkfbibudLz9H-gDZfNViSKRw2zluZeIhvcjca7c/edit',
-            sheetName: '시트1',
+            sheetName: '카드사별 키인현황',
             apiKey: 'AIzaSyAVtAzm9UjgGB1pqChvGvGKH7RpH0KCiVM'
         };
         // ========================================
@@ -924,7 +924,7 @@
                     const dateStr = row[0];
                     
                     // 연월일 형식 파싱: "2025년1월2일" 또는 "1월2일"
-                    const dateMatch = dateStr.match(/(?:(\d{4})년)?(\d+)월(\d+)일/);
+const dateMatch = dateStr.match(/(?:(\d{4})\s*년\s*)?(\d+)\s*월\s*(\d+)\s*일/);
                     
                     if (dateMatch) {
                         const year = dateMatch[1] || new Date().getFullYear().toString(); // 연도 없으면 현재 연도
@@ -1305,8 +1305,8 @@
 
             // 날짜순 정렬 (연월일 기준)
             monthPayments.sort((a, b) => {
-                const dateA = a.date.match(/(\d{4})년(\d+)월(\d+)일/);
-                const dateB = b.date.match(/(\d{4})년(\d+)월(\d+)일/);
+const dateA = a.date.match(/(\d{4})\s*년\s*(\d+)\s*월\s*(\d+)\s*일/);
+const dateB = b.date.match(/(\d{4})\s*년\s*(\d+)\s*월\s*(\d+)\s*일/);
                 if (!dateA || !dateB) return 0;
                 
                 const yearA = parseInt(dateA[1]);
